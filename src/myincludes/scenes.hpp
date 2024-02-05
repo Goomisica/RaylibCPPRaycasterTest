@@ -17,10 +17,10 @@ class Scenes {
         void mainMenu() {
            // make text and get text size for title...
             raylib::Text startScreenText(GetFontDefault(),"Hello!", this->tileSize.x * 10.0);
-            startScreenText.SetSpacing(this->tileSize.x * 2.0);
+            startScreenText.SetSpacing(this->tileSize.x);
             Vector2 textSize = startScreenText.MeasureEx();
 
-            raylib::Vector2 titlePos((float)(this->scaling->getWindow()->GetWidth()/2.0 + textSize.x/2.0), (float)(this->scaling->getWindow()->GetHeight()/2.0 + textSize.y/2.0));
+            raylib::Vector2 titlePos((float)(this->scaling->getWindow()->GetRenderWidth()/2.0 - textSize.x/2.0), (float)(this->scaling->getWindow()->GetRenderHeight()/2.0 - textSize.y/2.0));
             startScreenText.Draw(titlePos);
         }
         void game() {

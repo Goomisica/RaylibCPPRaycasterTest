@@ -2,6 +2,7 @@
 
 #include "myincludes/scenes.hpp"
 #include "myincludes/currentScreen.hpp"
+#include "myincludes/empty.hpp"
 
 int main() {
     const int screenWidth = 320;
@@ -10,7 +11,6 @@ int main() {
     raylib::Window window(screenWidth, screenHeight, "Title", FLAG_WINDOW_RESIZABLE);
     SizeScaling scaling(&window);
     Scenes app(&scaling);
-
 
     while(!window.ShouldClose()) {
         window.BeginDrawing();        
