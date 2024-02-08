@@ -4,26 +4,47 @@
 #include <vector>
 #include "drawable.hpp"
 #include "expansionType.hpp"
+#include <iostream>
 
-class DrawableList : Drawable {
+class DrawableList : public Drawable {
     private:
         std::vector<Drawable*> thingsToDraw;
-        EXPANSIONTYPE expansionType = VERTICAL;
+        EXPANSIONTYPE expansionType = NONE;
         bool ignoreChildren = true;
-        int seperation;
+        int seperation = 0;
     public:
+        // TODO: Add constructor
+        void add(Drawable* thingToAdd) {
+            this->thingsToDraw.push_back(thingToAdd);
+        }
+
         void draw(int x, int y) override {
             int xCurrent = x;
             int yCurrent = y;
             switch(this->expansionType) {
                 case HORIZONTAL:
-
+                    for (int i = 0; i < this->thingsToDraw.size(); i++) {
+                        Drawable* current = this->thingsToDraw.at(i);
+                        current->draw(xCurrent, yCurrent);
+                        // prepare next item pos
+                        xCurrent += this->seperation;
+                        xCurrent += current->getWidth();
+                    }
                 break;
                 case VERTICAL:
-
+                    for(int i = 0; i < this->thingsToDraw.size(); i++) {
+                        Drawable* current = this->thingsToDraw.at(i);
+                        current->draw(xCurrent, yCurrent);
+                        // prep next item pos
+                        yCurrent += this->seperation;
+                        yCurrent += current->getHeight();
+                    }
                 break;
                 case NONE:
-
+                    for (int i = 0; i < this->thingsToDraw.size(); i++) {
+                        Drawable* current = this->thingsToDraw.at(i);
+                        current->draw(xCurrent, yCurrent);
+                    }
                 break;
             }
         }
@@ -54,13 +75,14 @@ class DrawableList : Drawable {
                 break;
                 case NONE:
                     // same as vertical
-                    float width;
+                    float width2;
                     for (int i = 0; i < this->thingsToDraw.size(); i++) {
                         Drawable* current = this->thingsToDraw.at(i);
-                        if (current->getWidth() > maxWidth) {
-                            maxWidth = current->getWidth();
+                        if (current->getWidth() > width2) {
+                            width2 = current->getWidth();
                         }
                     }
+                    return width2;
                 break;
                 default:
                     return 0.0f;
@@ -91,14 +113,14 @@ class DrawableList : Drawable {
                     break;
                 case NONE:
                     // same as horiz.
-                    float maxHeight;
+                    float maxHeight2;
                     for (int i = 0; i < this->thingsToDraw.size(); i++) {
                         Drawable* current = this->thingsToDraw.at(i);
-                        if (current->getHeight() > maxHeight) {
-                           maxHeight = current->getHeight(); 
+                        if (current->getHeight() > maxHeight2) {
+                           maxHeight2 = current->getHeight(); 
                         }
                     }
-                    return maxHeight;
+                    return maxHeight2;
                 break;
                 default:
                     return 0.0f;

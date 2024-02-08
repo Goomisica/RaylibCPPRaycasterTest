@@ -4,7 +4,7 @@
 #include "../include/raylib-cpp.hpp"
 #include "drawable.hpp"
 
-class EzText : Drawable {
+class EzText : public Drawable {
     private:
         raylib::Text text;
         raylib::Color drawColor;
@@ -14,7 +14,7 @@ class EzText : Drawable {
             this->drawColor = drawColor;
         }
         void draw(int x, int y) override {
-            this->text.Draw(this->text.GetText(), (Vector2){x,y}, text.GetFontSize(), this->drawColor);
+            this->text.Draw(this->text.GetText(), (Vector2){(float)x,(float)y}, text.GetFontSize(), this->drawColor);
         }
 
         float getWidth() override {
