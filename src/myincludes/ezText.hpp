@@ -4,7 +4,7 @@
 #include "../include/raylib-cpp.hpp"
 #include "drawable.hpp"
 
-class EzText : public Drawable {
+class EzText : Drawable {
     private:
         raylib::Text text;
         raylib::Color drawColor;

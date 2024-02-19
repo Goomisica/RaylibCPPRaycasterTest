@@ -6,7 +6,7 @@
 #include "expansionType.hpp"
 #include <iostream>
 
-class DrawableList : public Drawable {
+class DrawableList : Drawable {
     private:
         std::vector<Drawable*> thingsToDraw;
         EXPANSIONTYPE expansionType = NONE;
@@ -14,8 +14,18 @@ class DrawableList : public Drawable {
         int seperation = 0;
     public:
         // TODO: Add constructor
-        void add(Drawable* thingToAdd) {
-            this->thingsToDraw.push_back(thingToAdd);
+        DrawableList() {
+            expansionType = NONE;
+            ignoreChildren = true;
+            seperation = 0;
+        }
+        DrawableList(EXPANSIONTYPE expansionType, int seperation) {
+            this->expansionType = expansionType;
+            this->seperation = seperation;
+        }
+        void add(void* thingToAdd) {
+            Drawable* thingToAddDrawable = (Drawable*)thingToAdd;
+            this->thingsToDraw.push_back(thingToAddDrawable);
         }
 
         void draw(int x, int y) override {

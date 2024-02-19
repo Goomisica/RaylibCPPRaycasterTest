@@ -3,6 +3,8 @@
 
 #include "../include/raylib-cpp.hpp"
 
+#include <iomanip>
+
 class SizeScaling {
     private:
         Vector2 tileSizePx;
